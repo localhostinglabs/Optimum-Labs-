@@ -1,0 +1,250 @@
+import React, { useState, useEffect } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  ActivityIndicator,
+} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { theme } from '../../styles/theme';
+import { styles } from './SendScreen.styles';
+import {
+  sendXRP,
+  isValidXRPAddress,
+  loadStoredWallet,
+  getBalance,
+} from '../../services';
+import type { WalletInfo } from '../../types';
+
+const SendScreen: React.FC = () => {
+  const navigation = useNavigation();
+  const [wallet, setWallet] = useState<WalletInfo | null>(null);
+  const [balance, setBalance] = useState<string>('0');
+  const [walletAddress, setWalletAddress] = useState('');
+  const [amount, setAmount] = useState('');
+  const [memo, setMemo] = useState('');
+  const [sending, setSending] = useState(false);
+
+  useEffect(() => {
+    loadWallet();
+  }, []);
+
+  const loadWallet = async () => {
+    try {
+      const stored = await loadStoredWallet();
+      if (stored) {
+        setWallet(stored);
+        const bal = await getBalance(stored.address);
+        setBalance(bal);
+      }
+    } catch (error: any) {
+      console.error('Failed to load wallet:', error);
+    }
+  };
+
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
+  const handlePasteAddress = async () => {
+    // TODO: Implement clipboard paste
+    console.log('Paste address');
+  };
+
+  const handleScanQR = () => {
+    (navigation as any).navigate('QR');
+  };
+
+  const handleSend = () => {
+    if (!wallet) {
+      Alert.alert('No Wallet', 'Please create a wallet first.');
+      return;
+    }
+
+    if (!walletAddress.trim() || !isValidXRPAddress(walletAddress.trim())) {
+      Alert.alert('Error', 'Please enter a valid XRP address (starts with r)');
+      return;
+    }
+
+    if (!amount.trim() || parseFloat(amount) <= 0) {
+      Alert.alert('Error', 'Please enter a valid amount');
+      return;
+    }
+
+    if (parseFloat(amount) >= parseFloat(balance)) {
+      Alert.alert('Error', 'Insufficient balance (account reserve required)');
+      return;
+    }
+
+    Alert.alert(
+      'Confirm Transaction',
+      `Send ${amount} XRP to ${walletAddress}?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Confirm',
+          onPress: async () => {
+            setSending(true);
+            try {
+              const result = await sendXRP(wallet.seed, {
+                destination: walletAddress.trim(),
+                amountXRP: amount,
+              });
+
+              if (result.success) {
+                Alert.alert(
+                  'Success ✅',
+                  `Sent ${amount} XRP\nHash: ${result.hash?.slice(0, 24)}...`,
+                  [{ text: 'OK', onPress: () => navigation.goBack() }],
+                );
+              } else {
+                Alert.alert('Transaction Failed', result.error || 'Unknown error');
+              }
+            } catch (error: any) {
+              Alert.alert('Error', error.message);
+            } finally {
+              setSending(false);
+            }
+          },
+        },
+      ],
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      {/* Header */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={handleGoBack}
+          style={styles.backButton}
+          accessible
+          accessibilityRole="button"
+          accessibilityLabel="Go back"
+        >
+          <Ionicons
+            name="arrow-back"
+            size={24}
+            color={theme.colors.onPrimary}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Send Crypto</Text>
+      </View>
+
+      <ScrollView
+        style={styles.content}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+      >
+        {/* Balance Info */}
+        {wallet && (
+          <View style={{ padding: 16, alignItems: 'center' }}>
+            <Text style={{ color: theme.colors.textSecondary, fontSize: 14 }}>
+              Available: {balance} XRP
+            </Text>
+          </View>
+        )}
+
+        {/* Wallet Address */}
+        <View style={[styles.inputSection, styles.firstInputSection]}>
+          <Text style={styles.label}>Wallet Address</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              value={walletAddress}
+              onChangeText={setWalletAddress}
+              placeholder="Enter wallet address (r...)"
+              placeholderTextColor={theme.colors.textSecondary}
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={handlePasteAddress}
+              accessible
+              accessibilityRole="button"
+              accessibilityLabel="Paste address"
+            >
+              <Ionicons
+                name="clipboard-outline"
+                size={20}
+                color={theme.colors.text}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.iconButton}
+              onPress={handleScanQR}
+              accessible
+              accessibilityRole="button"
+              accessibilityLabel="Scan QR code"
+            >
+              <Ionicons
+                name="scan-outline"
+                size={20}
+                color={theme.colors.text}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Amount */}
+        <View style={styles.inputSection}>
+          <Text style={styles.label}>Amount</Text>
+          <View style={styles.amountContainer}>
+            <TextInput
+              style={styles.amountInput}
+              value={amount}
+              onChangeText={setAmount}
+              placeholder="0"
+              placeholderTextColor={theme.colors.textSecondary}
+              keyboardType="decimal-pad"
+            />
+            <Text style={styles.currencyLabel}>XRP</Text>
+          </View>
+        </View>
+
+        {/* Memo */}
+        <View style={styles.inputSection}>
+          <Text style={styles.label}>Memo</Text>
+          <TextInput
+            style={[styles.input, styles.memoInput]}
+            value={memo}
+            onChangeText={setMemo}
+            placeholder="Optional"
+            placeholderTextColor={theme.colors.textSecondary}
+            multiline
+            numberOfLines={3}
+          />
+        </View>
+
+        {/* Fee Info */}
+        <View style={styles.feeSection}>
+          <Text style={styles.feeText}>Network Fee: ~0.000012 XRP</Text>
+        </View>
+
+        {/* Send Button */}
+        <TouchableOpacity
+          style={[styles.sendButton, sending && { opacity: 0.6 }]}
+          onPress={handleSend}
+          activeOpacity={0.8}
+          disabled={sending}
+          accessible
+          accessibilityRole="button"
+          accessibilityLabel="Send crypto"
+        >
+          {sending ? (
+            <ActivityIndicator color={theme.colors.onPrimary} />
+          ) : (
+            <Text style={styles.sendButtonText}>Send</Text>
+          )}
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+  );
+};
+
+export default SendScreen;
