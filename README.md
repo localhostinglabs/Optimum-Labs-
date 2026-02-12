@@ -23,3 +23,8 @@ We chose XRPL due to its native advantages over other similar blockchains. Fast 
 
 **3. NFTs:**  Digital rewards that engage users with our ecosystem while having capabilities to be used as a promotional and marketing tool for businesses.
 
+# Entity
+
+Optimum Labs Pty Ltd, Australia
+[Jiwoong Kang](https://www.linkedin.com/in/jiwoongk07/)
+
