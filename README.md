@@ -1,4 +1,4 @@
-<img width="1416" height="576" alt="image" src="https://github.com/user-attachments/assets/e2b964ca-dbaf-4af2-a92b-c2a1ea1e4ca4" /># Optimum-Labs
+# Optimum-Labs
 This is the public github repo for Optimum Labs Pty Ltd. We aim to demonstrate Optimum's integration of XRPL testnet including XRP transactions and NFT mintage for facilitating tourism spending on XRPL.
 
 [Optimum Website](https://optimum-pay.com/)
