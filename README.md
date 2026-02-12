@@ -15,7 +15,7 @@ NFTs are digital rewards; this may come in the form of stamps,tickets, landmarks
 Our vision can be summed up as; to modernise the way we spend money on a retail level, and reward users in the form of digital ownership(NFTs). 
 
 # XPRL
-We chose XRPL due to its native advantages over other similar blockchains. Fast settlement time, low fees, regulatory clarity, native tokens such as RLUSD and XRP are viewed as strategic advantages for utilising them in cross-border payments.
+We chose XRPL due to its native advantages over other similar blockchains. Fast settlement time, low fees, regulatory alignment, native tokens such as RLUSD and XRP are viewed as strategic advantages for utilising them in cross-border payments.
 
 **1. XRP:** XRP's Deep liquidity allows for pathfinding and autobridging to efficiently settle transactions between tokens. It can also work as the single medium of exchange that can be held or off-ramped easily.
 
