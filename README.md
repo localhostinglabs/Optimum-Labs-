@@ -21,5 +21,5 @@ We chose XRPL due to its native advantages over other similar blockchains. Fast 
 
 **2. RLUSD:** USD-pegged stablecoin to provide reliable value for merchants to hold as a balance as an alternative to XRP. 
 
-**3. NFTs:**  Digital rewards that engage users as a promotional and marketing tool.
+**3. NFTs:**  Digital rewards that engage users with our ecosystem while having capabilities to be used as a promotional and marketing tool.
 
