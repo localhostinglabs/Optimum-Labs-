@@ -5,6 +5,7 @@ This is the public github repo for Optimum Labs Pty Ltd. We aim to demonstrate O
 
 [Demo Video](https://youtube.com/shorts/YzD3Q789dB4?feature=share)
 
+[Pitch Deck](
 
 Optimum is an international payments project that aims to integrate blockchain finance into retail tourism spending. With Optimum, customers can eliminate the need for converting to multiple currencies for each travel, cut costs and top up cryptocurrency instantly. Merchants can access their funds immediately without having to rely on settlement clearing times, and this unlocks dormant capital that can be used productively. The logic is simple ; customers spend XRP or a fiat-pegged stablecoin, and the merchant receives the funds in their preferred cryptocurrency supported on XRPL. The merchant is free to off-ramp into local fiat currency using a local exchange or custodian as needed. 
 
