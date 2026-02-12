@@ -19,7 +19,7 @@ We chose XRPL due to its native advantages over other similar blockchains. Fast 
 
 **1. XRP:** XRP's Deep liquidity allows for pathfinding and autobridging to efficiently settle transactions between tokens. It can also work as the single medium of exchange that can be held or off-ramped easily.
 
-**2. RLUSD:** USD-pegged stablecoin to provide reliable value for merchants to hold as a balance as an alternative to XRP. 
+**2. RLUSD:** USD-pegged stablecoin to provide reliable value for merchants to hold as a balance alternative to XRP. 
 
-**3. NFTs:**  Digital rewards that engage users with our ecosystem while having capabilities to be used as a promotional and marketing tool.
+**3. NFTs:**  Digital rewards that engage users with our ecosystem while having capabilities to be used as a promotional and marketing tool for businesses.
 
