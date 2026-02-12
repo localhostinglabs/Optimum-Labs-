@@ -26,5 +26,6 @@ We chose XRPL due to its native advantages over other similar blockchains. Fast 
 # Entity
 
 Optimum Labs Pty Ltd, Australia
+
 [Jiwoong Kang](https://www.linkedin.com/in/jiwoongk07/)
 
