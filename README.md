@@ -18,6 +18,8 @@ Our vision can be summed up as; to modernise the way we spend money on a retail 
 We chose XRPL due to its native advantages over other similar blockchains. Fast settlement time, low fees, regulatory clarity, native tokens such as RLUSD and XRP are viewed as strategic advantages for utilising them in cross-border payments.
 
 **1. XRP:** XRP's Deep liquidity allows for pathfinding and autobridging to efficiently settle transactions between tokens. It can also work as the single medium of exchange that can be held or off-ramped easily.
+
 **2. RLUSD:** USD-pegged stablecoin to provide reliable value for merchants to hold as a balance as an alternative to XRP. 
+
 **3. NFTs:**  Digital rewards that engage users as a promotional and marketing tool.
 
